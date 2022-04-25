@@ -1,0 +1,49 @@
+using System;
+using System.Linq;
+
+
+namespace RecountKattis
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+       
+        //a sample list of votes to be used for this problem:
+        string[] votes = { "Alex Brown", "Nate Smith", "Deborah Wilson",
+            "Aliison Small", "Nate Smith","Marylyn Terry",
+            "Sunair Bakshi","Allen Cao","Jordyn Lutz", "Ashley Smith","***"};
+
+            //this veriable finds the most frequent name in ghe above string by taking a count
+            //of the names placing them in decending order and choosing the name at the top
+            //top of the list
+            var highestVoted = votes.GroupBy(v=>v)
+                    .OrderByDescending(g=>g.Count())
+                    .Select(g=>g.Count())
+                    .FirstOrDefault();
+
+            //this variable tracks the amount of votes the highesr voted candidate receives by
+            //using the same process as the highestVoted variable 
+            var highestVotedCount=votes.GroupBy(v=>v)
+                .OrderByDescending(g=>g.Count())
+                .Select(g=>g.Count())
+                .FirstOrDefault();
+
+            var highestVotedCount2=votes.GroupBy(v=>v)
+                .OrderByDescending(g=>g.Count())
+                .Select(g=>g.Count())
+                .Skip(1).First();
+
+            if(highestVotedCount != highestVotedCount2)
+                    {
+                Console.WriteLine(highestVoted);
+            }
+            else
+            {
+                Console.WriteLine("Runoff!");
+            }
+
+        
+        }
+    }
+}
